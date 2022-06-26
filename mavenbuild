@@ -1,0 +1,23 @@
+pipeline {
+    agent{label 'build-server'}
+    
+    environment{
+        PATH = "/home/ec2-user/apache-maven-3.6.3/bin:$PATH"
+        }
+    stages {
+        stage("smc checkout") {
+            steps {
+              git 'https://github.com/RajeshwaranM/myweb.git'
+            }
+        }
+        
+         stage("Maven Build") {
+            steps {
+              sh 'mvn --version'
+              sh 'mvn clean package'
+            }
+        }
+        
+        
+    }
+}
